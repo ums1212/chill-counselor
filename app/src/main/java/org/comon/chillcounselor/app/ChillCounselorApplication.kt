@@ -1,4 +1,4 @@
-package org.comon.chillcounselor
+package org.comon.chillcounselor.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -1,0 +1,48 @@
+package org.comon.chillcounselor.di
+
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import org.comon.chillcounselor.data.api.CounchillorApi
+import org.comon.chillcounselor.data.mapper.RequestCounselMapper
+import org.comon.chillcounselor.data.mapper.ResponseCounselMapper
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object DataModule {
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit (
+        moshi: Moshi
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl("")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideApiService(
+        retrofit: Retrofit
+    ): CounchillorApi = retrofit.create(CounchillorApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRequestCounselMapper(): RequestCounselMapper = RequestCounselMapper()
+
+    @Provides
+    @Singleton
+    fun provideResponseCounselMapper(): ResponseCounselMapper = ResponseCounselMapper()
+}

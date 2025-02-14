@@ -1,4 +1,4 @@
-package org.comon.chillcounselor
+package org.comon.chillcounselor.common
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,4 +1,4 @@
-package org.comon.presentation
+package org.comon.chillcounselor.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import org.comon.presentation.ui.theme.ChillCounselorTheme
+import org.comon.chillcounselor.presentation.ui.theme.ChillCounselorTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

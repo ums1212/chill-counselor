@@ -6,7 +6,7 @@
 
     <application>
         <activity
-            android:name=".MainActivity"
+            android:name="org.comon.chillcounselor.presentation.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.ChillCounselor" >

@@ -1,12 +1,12 @@
 [versions]
 agp = "8.6.1"
 kotlin = "2.1.0"
-coreKtx = "1.15.0"
+coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.10.0"
+activityCompose = "1.9.3"
 composeBom = "2025.02.00"
 appcompat = "1.7.0"
 material = "1.12.0"
@@ -19,6 +19,8 @@ retrofit = "2.9.0"
 moshi-kotlin = "1.15.2"
 coilCompose = "3.0.0-rc02"
 coilNetworkOkhttp = "3.0.0-rc02"
+coroutines-core = "1.9.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +48,7 @@ moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi-kotli
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines-core" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
