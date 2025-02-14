@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import org.comon.chillcounselor.data.api.CounchillorApi
 import org.comon.chillcounselor.data.mapper.RequestCounselMapper
 import org.comon.chillcounselor.data.mapper.ResponseCounselMapper
+import org.comon.data.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -28,7 +29,7 @@ object DataModule {
     fun provideRetrofit (
         moshi: Moshi
     ): Retrofit = Retrofit.Builder()
-        .baseUrl("")
+        .baseUrl(BuildConfig.API_BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 

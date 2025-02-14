@@ -26,8 +26,8 @@ class CounselRepositoryImpl @Inject constructor(
         }else{
             throw IOException("Counchillor Api call isn't successful")
         }
-    }.catch { result ->
-        emit(Result.failure(result))
+    }.catch { error ->
+        emit(Result.failure(error))
     }
 
 }

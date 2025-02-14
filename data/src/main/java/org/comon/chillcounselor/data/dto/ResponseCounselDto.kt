@@ -6,13 +6,13 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ResponseCounselDto(
     @Json(name = "message")
-    val message: String,
+    val message: String = "",
     @Json(name = "advice")
-    val advice: String,
+    val advice: String = "",
     @Json(name = "chillness_level")
-    val chillnessLevel: Int,
+    val chillnessLevel: Int = 0,
     @Json(name = "error")
-    val error: String,
+    val error: String = "",
     @Json(name = "reason")
-    val reason: String,
+    val reason: String = "",
 )
