@@ -1,3 +1,15 @@
 <resources>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="loading_text_splash_screen">chill guy를 불러오는 중…</string>
+    <string name="content_description_splash_screen_image">content_description_splash_screen_image</string>
+    <string name="content_description_bgm_button">content_description_bgm_button</string>
+
+    <string name="start_button">시작하기</string>
+    <string name="complete_button">작성 완료</string>
+    <string name="cancel_button">취소하기</string>
+    <string name="write_new_button">새로운 상담 작성</string>
+    <string name="rewrite_button">다시 작성</string>
+    <string name="back_button">돌아가기</string>
+    <string name="quit_button">앱 종료</string>
 </resources>
