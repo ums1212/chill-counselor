@@ -1,14 +1,20 @@
 package org.comon.chillcounselor.presentation.component
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import org.comon.presentation.R
 
 @Composable
@@ -25,78 +31,130 @@ fun BGMButton(toggleBGM: () -> Unit){
 
 @Composable
 fun StartButton(
-    modifier: Modifier = Modifier,
     startWrite: ()->Unit,
+    modifier: Modifier = Modifier,
 ){
     Button(
-        modifier = modifier,
-        onClick = startWrite
+        onClick = startWrite,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
-        Text(stringResource(R.string.start_button))
+        Text(
+            text = stringResource(R.string.start_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
     }
 }
 
 @Composable
 fun CompleteButton(
-    modifier: Modifier = Modifier,
-    requestCounsel: ()->Unit
+    requestCounsel: ()->Unit,
+    modifier: Modifier = Modifier
 ){
     Button(
         onClick = requestCounsel,
         modifier = modifier
     ) {
-        Text(stringResource(R.string.complete_button))
+        Text(
+            text = stringResource(R.string.complete_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
     }
 }
 
 @Composable
 fun CancelButton(
-    modifier: Modifier = Modifier,
-    cancelRequest: ()->Unit
+    cancelRequest: ()->Unit,
+    modifier: Modifier = Modifier
 ){
     Button(
         onClick = cancelRequest,
         modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
-        Text(stringResource(R.string.cancel_button))
+        Text(
+            text = stringResource(R.string.cancel_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
     }
 }
 
 @Composable
 fun WriteNewButton(
-    modifier: Modifier = Modifier,
-    backToInitScreen: ()->Unit
+    startWrite: ()->Unit,
+    modifier: Modifier = Modifier
+){
+    Button(
+        onClick = startWrite,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
+    ) {
+        Text(
+            text = stringResource(R.string.write_new_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
+    }
+}
+
+@Composable
+fun BackButton(
+    backToInitScreen: ()->Unit,
+    modifier: Modifier = Modifier
 ){
     Button(
         onClick = backToInitScreen,
         modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
-        Text(stringResource(R.string.write_new_button))
+        Text(
+            text = stringResource(R.string.back_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
     }
 }
 
 @Composable
 fun RewriteButton(
-    modifier: Modifier = Modifier,
-    startWrite: ()->Unit
+    startWrite: ()->Unit,
+    modifier: Modifier = Modifier
 ){
     Button(
         onClick = startWrite,
         modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
-        Text(stringResource(R.string.rewrite_button))
+        Text(
+            text = stringResource(R.string.rewrite_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
     }
 }
 
 @Composable
 fun FinishButton(
-    modifier: Modifier = Modifier,
-    finishApp: ()->Unit
+    finishApp: ()->Unit,
+    modifier: Modifier = Modifier
 ){
     Button(
         onClick = finishApp,
         modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding)),
+        colors = ButtonColors(
+            containerColor = Color.Red,
+            contentColor = Color.White,
+            disabledContainerColor = Color.Unspecified,
+            disabledContentColor = Color.Unspecified
+        )
     ) {
-        Text(stringResource(R.string.rewrite_button))
+        Text(
+            text = stringResource(R.string.quit_button),
+            fontSize = dimensionResource(R.dimen.button_text_size).value.sp
+        )
     }
 }

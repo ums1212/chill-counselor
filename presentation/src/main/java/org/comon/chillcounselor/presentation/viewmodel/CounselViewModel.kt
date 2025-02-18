@@ -1,7 +1,5 @@
 package org.comon.chillcounselor.presentation.viewmodel
 
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +22,19 @@ class CounselViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _counselUiState = MutableStateFlow<CounselUiState>(CounselUiState.SplashScreen)
-    val counselUiState: StateFlow<CounselUiState> = _counselUiState.asStateFlow()
+    val counselUiState = _counselUiState.asStateFlow()
+
+    private val _chillGuyState = MutableStateFlow<ChillGuyState>(ChillGuyState.SmallGuy)
+    val chillGuyState = _chillGuyState.asStateFlow()
+
+    private val _bgmButtonState = MutableStateFlow(BGMPlayState.Play)
+    val bgmButtonState = _bgmButtonState.asStateFlow()
+
+    private val _bgmPlayState = MutableStateFlow(false)
+    val bgmPlayState = _bgmPlayState.asStateFlow()
+
+    private val _inputCounselContent = MutableStateFlow("")
+    val inputCounselContent: StateFlow<String> = _inputCounselContent.asStateFlow()
 
     private val _requestViewModelScope = viewModelScope
 
@@ -36,9 +46,10 @@ class CounselViewModel @Inject constructor(
         }
     }
 
-    fun backToInitScreen(){
+    fun changeInToInitScreen(){
         _counselUiState.value = CounselUiState.InitialScreen
         _inputCounselContent.value = ""
+        _chillGuyState.value = ChillGuyState.LargeGuy
     }
 
     fun startWrite(){
@@ -46,23 +57,17 @@ class CounselViewModel @Inject constructor(
         _inputCounselContent.value = ""
     }
 
-    fun cancelRequest(){
-        _requestViewModelScope.cancel(CancellationException("사용자 취소"))
-    }
-
-    private val _inputCounselContent = MutableStateFlow("")
-    val inputCounselContent: StateFlow<String> = _inputCounselContent.asStateFlow()
-
     fun changeInputValue(input: String){
-        _inputCounselContent.value = input
+        if(input.length <= 1000){
+            _inputCounselContent.value = input
+        }
     }
-
-    private val _chillGuySize = MutableStateFlow(150.dp)
-    val chillGuySize: StateFlow<Dp> = _chillGuySize.asStateFlow()
 
     fun requestCounsel() = _requestViewModelScope.launch(Dispatchers.IO + _cancelHandler) {
+
+        _counselUiState.value = CounselUiState.LoadingScreen
+
         requestCounselUseCase.invoke(RequestCounselData(_inputCounselContent.value)).collect { result ->
-            _counselUiState.value = CounselUiState.LoadingScreen
             result.onSuccess { responseCounselData ->
                 if(responseCounselData.error.isEmpty()){
                     _counselUiState.value = CounselUiState.ResultScreen(responseCounselData)
@@ -71,7 +76,28 @@ class CounselViewModel @Inject constructor(
                 }
             }.onFailure { error ->
                 _counselUiState.value = CounselUiState.ServerOutScreen(error.message ?: "Unknown Error")
+                _chillGuyState.value = ChillGuyState.ErrorGuy
             }
+        }
+    }
+
+    fun cancelRequest(){
+        _requestViewModelScope.cancel(CancellationException("사용자 취소"))
+    }
+
+    fun playBGM(){
+        _bgmPlayState.value = true
+    }
+
+    fun stopBGM(){
+        _bgmPlayState.value = false
+    }
+
+    fun toggleBGM(){
+        if(_bgmPlayState.value){
+            stopBGM()
+        }else{
+            playBGM()
         }
     }
 }
@@ -84,4 +110,15 @@ sealed class CounselUiState {
     data class ResultScreen(val counselData: ResponseCounselData): CounselUiState()
     data class WrongAskScreen(val message: String): CounselUiState()
     data class ServerOutScreen(val message: String): CounselUiState()
+}
+
+sealed class ChillGuyState {
+    data object SmallGuy: ChillGuyState()
+    data object LargeGuy: ChillGuyState()
+    data object ErrorGuy: ChillGuyState()
+}
+
+sealed class BGMPlayState {
+    data object Stop: BGMPlayState()
+    data object Play: BGMPlayState()
 }

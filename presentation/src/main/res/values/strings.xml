@@ -1,15 +1,30 @@
 <resources>
     <string name="title_activity_main">MainActivity</string>
 
-    <string name="loading_text_splash_screen">chill guy를 불러오는 중…</string>
     <string name="content_description_splash_screen_image">content_description_splash_screen_image</string>
+    <string name="content_description_chill_guy_image">content_description_chill_guy_image</string>
+    <string name="content_description_error_image">content_description_error_image</string>
     <string name="content_description_bgm_button">content_description_bgm_button</string>
+    <string name="update_transition_label">update_transition_label</string>
+    <string name="animate_dp_label">animate_dp_label</string>
+
+    <string name="title_splash_screen">chill guy를 불러오는 중…</string>
+    <string name="title_main_screen">너의 고민을 들려줘</string>
+    <string name="title_write_screen">고민을 작성해주세요</string>
+    <string name="title_loading_screen">당신의 고민을 듣는 중…</string>
+    <string name="title_result_screen">이런 건 어떨까요?</string>
+    <string name="title_wrong_screen">다시 입력해 주세요</string>
+    <string name="title_error_screen">부재중…</string>
+
 
     <string name="start_button">시작하기</string>
     <string name="complete_button">작성 완료</string>
     <string name="cancel_button">취소하기</string>
-    <string name="write_new_button">새로운 상담 작성</string>
+    <string name="write_new_button">새로운 상담 시작</string>
     <string name="rewrite_button">다시 작성</string>
     <string name="back_button">돌아가기</string>
     <string name="quit_button">앱 종료</string>
+
+    <string name="counsel_text_field_placeholder">고민과 관련없는 내용이 있을 경우 답변이 나오지 않을 수 있습니다.</string>
+
 </resources>
