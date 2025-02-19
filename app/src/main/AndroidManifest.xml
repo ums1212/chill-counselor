@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChillCounselor"
         android:name=".app.ChillCounselorApplication"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
     </application>
 

@@ -1,5 +1,6 @@
 package org.comon.chillcounselor.data.repository
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -21,6 +22,7 @@ class CounselRepositoryImpl @Inject constructor(
     override fun requestCounsel(requestCounselData: RequestCounselData): Flow<Result<ResponseCounselData>> = flow {
         val result = counchillorApi.requestCounsel(requestCounselMapper.mapToDto(requestCounselData))
         if(result.isSuccessful){
+            Log.d("test1234", "$result")
             val dto = result.body() ?: throw IOException("Counchillor Api call isn't successful")
             emit(Result.success(responseCounselMapper.mapToModel(dto)))
         }else{
