@@ -4,6 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import org.comon.chillcounselor.presentation.viewmodel.CounselUiState
 import org.comon.presentation.R
@@ -20,6 +21,7 @@ fun TitleText(uiState: CounselUiState){
             is CounselUiState.WrongAskScreen -> stringResource(R.string.title_wrong_screen)
             is CounselUiState.ServerOutScreen -> stringResource(R.string.title_error_screen)
         },
-        fontSize = dimensionResource(R.dimen.title_text_size).value.sp
+        fontSize = dimensionResource(R.dimen.title_text_size).value.sp,
+        fontWeight = FontWeight.Bold
     )
 }

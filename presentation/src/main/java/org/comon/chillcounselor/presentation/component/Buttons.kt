@@ -3,6 +3,7 @@ package org.comon.chillcounselor.presentation.component
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -18,12 +19,19 @@ import androidx.compose.ui.unit.sp
 import org.comon.presentation.R
 
 @Composable
-fun BGMButton(toggleBGM: () -> Unit){
+fun BGMButton(
+    bgmState: Boolean,
+    toggleBGM: () -> Unit
+){
     IconButton(
         onClick = toggleBGM
     ) {
         Icon(
-            Icons.Filled.PlayArrow,
+            imageVector = if(bgmState){
+                Icons.Default.Close
+            } else {
+                Icons.Filled.PlayArrow
+            },
             stringResource(R.string.content_description_bgm_button)
         )
     }
@@ -54,7 +62,7 @@ fun CompleteButton(
 ){
     Button(
         onClick = requestCounsel,
-        modifier = modifier
+        modifier = modifier.padding(top = dimensionResource(R.dimen.button_top_padding))
     ) {
         Text(
             text = stringResource(R.string.complete_button),
@@ -108,6 +116,7 @@ fun BackButton(
         onClick = backToInitScreen,
         modifier = modifier
             .fillMaxWidth()
+            .padding(top = dimensionResource(R.dimen.button_top_padding))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
         Text(

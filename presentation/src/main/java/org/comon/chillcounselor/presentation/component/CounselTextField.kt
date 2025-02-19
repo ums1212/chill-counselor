@@ -1,5 +1,7 @@
 package org.comon.chillcounselor.presentation.component
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +19,7 @@ import org.comon.presentation.R
 fun CounselTextField(
     textValue: String,
     textLength: Int,
+    isError: Boolean,
     changeTextValue: (String) -> Unit,
 ){
     OutlinedTextField(
@@ -30,11 +33,22 @@ fun CounselTextField(
             Text(stringResource(R.string.counsel_text_field_placeholder))
         },
         supportingText = {
-            Text("$textLength / 1000")
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = if(isError) stringResource(R.string.counsel_text_field_empty_message) else "",
+                    color = Color.Red
+                )
+                Text(stringResource(R.string.counsel_text_field_counter, textLength))
+            }
         },
+        isError = isError,
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Color.White.copy(alpha = 0.7f),
-            unfocusedContainerColor = Color.White.copy(alpha = 0.7f)
+            unfocusedContainerColor = Color.White.copy(alpha = 0.7f),
+            errorContainerColor = Color.White.copy(alpha = 0.7f),
         )
     )
 }
