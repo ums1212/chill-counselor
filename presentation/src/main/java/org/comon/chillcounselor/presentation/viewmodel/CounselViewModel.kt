@@ -1,6 +1,5 @@
 package org.comon.chillcounselor.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +14,6 @@ import org.comon.chillcounselor.domain.model.RequestCounselData
 import org.comon.chillcounselor.domain.model.ResponseCounselData
 import org.comon.chillcounselor.domain.usecase.CheckNetworkStateUseCase
 import org.comon.chillcounselor.domain.usecase.RequestCounselUseCase
-import org.comon.chillcounselor.domain.util.NetworkStateManager
 import javax.inject.Inject
 
 @HiltViewModel
