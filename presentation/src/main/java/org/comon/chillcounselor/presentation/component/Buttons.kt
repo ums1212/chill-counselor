@@ -9,13 +9,17 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
+import com.google.android.material.color.MaterialColors
+import org.comon.chillcounselor.presentation.ui.theme.ChillCounselorTheme
 import org.comon.presentation.R
 
 @Composable
@@ -57,12 +61,20 @@ fun StartButton(
 
 @Composable
 fun CompleteButton(
-    requestCounsel: ()->Unit,
+    requestCounsel: () -> Unit,
+    enabled: Boolean,
     modifier: Modifier = Modifier
 ){
     Button(
         onClick = requestCounsel,
-        modifier = modifier.padding(top = dimensionResource(R.dimen.button_top_padding))
+        modifier = modifier.padding(top = dimensionResource(R.dimen.button_top_padding)),
+        enabled = enabled,
+        colors = ButtonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = Color.White,
+            disabledContainerColor = Color.Gray,
+            disabledContentColor = Color.DarkGray,
+        )
     ) {
         Text(
             text = stringResource(R.string.complete_button),

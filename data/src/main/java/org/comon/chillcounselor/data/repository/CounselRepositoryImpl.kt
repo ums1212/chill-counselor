@@ -20,13 +20,13 @@ class CounselRepositoryImpl @Inject constructor(
 ): CounselRepository {
 
     override fun requestCounsel(requestCounselData: RequestCounselData): Flow<Result<ResponseCounselData>> = flow {
+        val exceptionMessage = "ChillGuy가 잠시 부재중입니다. 잠시 후 다시 시도해주세요."
         val result = counchillorApi.requestCounsel(requestCounselMapper.mapToDto(requestCounselData))
         if(result.isSuccessful){
-            Log.d("test1234", "$result")
-            val dto = result.body() ?: throw IOException("Counchillor Api call isn't successful")
+            val dto = result.body() ?: throw IOException(exceptionMessage)
             emit(Result.success(responseCounselMapper.mapToModel(dto)))
         }else{
-            throw IOException("Counchillor Api call isn't successful")
+            throw IOException(exceptionMessage)
         }
     }.catch { error ->
         emit(Result.failure(error))

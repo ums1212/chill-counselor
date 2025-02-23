@@ -41,15 +41,13 @@ fun MainScreen(
     viewModel: CounselViewModel = viewModel(),
 ){
     val uiState = viewModel.counselUiState.collectAsStateWithLifecycle().value
-    val chillGuyState = viewModel.chillGuyState.collectAsStateWithLifecycle().value
-    val inputTextValue = viewModel.inputCounselContent.collectAsStateWithLifecycle().value
 
     LaunchedEffect(uiState) {
         if(uiState == CounselUiState.SplashScreen){
             delay(3000)
             viewModel.checkNetworkState()
         } else {
-            viewModel.playBGM()
+            viewModel.toggleBGM()
         }
     }
 
@@ -83,7 +81,7 @@ fun MainScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ChillGuyImage(
-                    chillGuyState = chillGuyState
+                    chillGuyState = viewModel.chillGuyState.collectAsStateWithLifecycle().value
                 )
 
                 if(uiState is CounselUiState.ResultScreen){
@@ -157,15 +155,14 @@ fun MainScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CounselTextField(
-                    textValue = inputTextValue,
-                    textLength = inputTextValue.length,
-                    isError = viewModel.inputErrorState.collectAsStateWithLifecycle().value,
+                    textValue = viewModel.inputCounselContent.collectAsStateWithLifecycle().value,
                     changeTextValue = {
                         viewModel.changeInputValue(it)
                     }
                 )
                 CompleteButton(
-                    requestCounsel = { viewModel.completeCounselInput() }
+                    requestCounsel = { viewModel.completeCounselInput() },
+                    enabled = viewModel.isInputValid.collectAsStateWithLifecycle().value
                 )
             }
 

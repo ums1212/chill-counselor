@@ -18,8 +18,6 @@ import org.comon.presentation.R
 @Composable
 fun CounselTextField(
     textValue: String,
-    textLength: Int,
-    isError: Boolean,
     changeTextValue: (String) -> Unit,
 ){
     OutlinedTextField(
@@ -37,14 +35,9 @@ fun CounselTextField(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    text = if(isError) stringResource(R.string.counsel_text_field_empty_message) else "",
-                    color = Color.Red
-                )
-                Text(stringResource(R.string.counsel_text_field_counter, textLength))
+                Text(stringResource(R.string.counsel_text_field_counter, textValue.length))
             }
         },
-        isError = isError,
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Color.White.copy(alpha = 0.7f),
             unfocusedContainerColor = Color.White.copy(alpha = 0.7f),
