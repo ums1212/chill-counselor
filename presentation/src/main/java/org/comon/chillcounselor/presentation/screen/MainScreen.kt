@@ -11,15 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlinx.coroutines.delay
 import org.comon.chillcounselor.presentation.component.AnswerText
 import org.comon.chillcounselor.presentation.component.BGMButton
 import org.comon.chillcounselor.presentation.component.BackButton
@@ -34,25 +30,25 @@ import org.comon.chillcounselor.presentation.component.StartButton
 import org.comon.chillcounselor.presentation.component.TitleText
 import org.comon.chillcounselor.presentation.component.WriteNewButton
 import org.comon.chillcounselor.presentation.ui.theme.ChillBackground
+import org.comon.chillcounselor.presentation.viewmodel.ChillGuyState
 import org.comon.chillcounselor.presentation.viewmodel.CounselUiState
-import org.comon.chillcounselor.presentation.viewmodel.CounselViewModel
 import org.comon.presentation.R
 
 @Composable
 fun MainScreen(
+    uiState: CounselUiState,
+    chillGuyState: ChillGuyState,
+    bgmState: Boolean,
+    textInputValue: String,
+    isInputValid: Boolean,
+    changeIntoInitScreen: () -> Unit,
+    changeIntoWriteScreen: () -> Unit,
+    requestCounsel: () -> Unit,
+    cancelRequest: () -> Unit,
+    changeInputValue: (String) -> Unit,
+    toggleBGM: () -> Unit,
     finishApp: () -> Unit,
-    viewModel: CounselViewModel = viewModel(),
 ){
-    val uiState = viewModel.counselUiState.collectAsStateWithLifecycle().value
-
-    LaunchedEffect(uiState) {
-        if(uiState == CounselUiState.SplashScreen){
-            delay(3000)
-            viewModel.checkNetworkState()
-        } else {
-            viewModel.playBGM()
-        }
-    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -84,7 +80,7 @@ fun MainScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ChillGuyImage(
-                    chillGuyState = viewModel.chillGuyState.collectAsStateWithLifecycle().value
+                    chillGuyState = chillGuyState
                 )
 
                 if(uiState is CounselUiState.ResultScreen){
@@ -92,51 +88,53 @@ fun MainScreen(
                 }
             }
 
-            if(uiState == CounselUiState.SplashScreen || uiState == CounselUiState.LoadingScreen){
-                CircularProgressIndicator(
-                    modifier = Modifier.padding(
-                        top = dimensionResource(R.dimen.circular_progress_indicator_padding_top)
-                    )
-                )
-            }
-
             when(uiState){
+                CounselUiState.SplashScreen -> {
+                    CircularProgressIndicator(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(R.dimen.circular_progress_indicator_padding_top)
+                        )
+                    )
+                }
                 CounselUiState.InitialScreen -> StartButton(
-                    startWrite = { viewModel.startWrite() }
+                    startWrite = changeIntoWriteScreen
                 )
                 CounselUiState.WriteScreen -> BackButton(
-                    backToInitScreen = { viewModel.changeInToInitScreen() }
+                    backToInitScreen = changeIntoInitScreen
                 )
-                CounselUiState.LoadingScreen -> CancelButton(
-                    cancelRequest = { viewModel.cancelRequest() }
-                )
+                CounselUiState.LoadingScreen -> {
+                    CircularProgressIndicator(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(R.dimen.circular_progress_indicator_padding_top)
+                        )
+                    )
+                    CancelButton(
+                        cancelRequest = cancelRequest
+                    )
+                }
                 is CounselUiState.ResultScreen -> {
                     Column {
                         WriteNewButton(
-                            startWrite = { viewModel.startWrite() }
+                            startWrite = changeIntoWriteScreen
                         )
                         BackButton(
-                            backToInitScreen = { viewModel.changeInToInitScreen() }
+                            backToInitScreen = changeIntoInitScreen
                         )
                     }
                 }
                 is CounselUiState.WrongAskScreen -> {
                     Column {
                         RewriteButton(
-                            startWrite = { viewModel.startWrite() }
+                            startWrite = changeIntoWriteScreen
                         )
                         BackButton(
-                            backToInitScreen = { viewModel.changeInToInitScreen() }
+                            backToInitScreen = changeIntoInitScreen
                         )
                     }
                 }
                 is CounselUiState.ServerOutScreen -> FinishButton(
-                    finishApp = {
-                        viewModel.releaseBGM()
-                        finishApp()
-                    }
+                    finishApp = finishApp
                 )
-                else -> {}
             }
         }
 
@@ -153,8 +151,8 @@ fun MainScreen(
                     fontSize = dimensionResource(R.dimen.copyright_text_size).value.sp
                 )
                 BGMButton(
-                    bgmState = viewModel.bgmPlayState.collectAsStateWithLifecycle().value,
-                    toggleBGM = { viewModel.toggleBGM() }
+                    bgmState = bgmState,
+                    toggleBGM = toggleBGM
                 )
             }
         }
@@ -166,14 +164,12 @@ fun MainScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CounselTextField(
-                    textValue = viewModel.inputCounselContent.collectAsStateWithLifecycle().value,
-                    changeTextValue = {
-                        viewModel.changeInputValue(it)
-                    }
+                    textValue = textInputValue,
+                    changeTextValue = changeInputValue
                 )
                 CompleteButton(
-                    requestCounsel = { viewModel.completeCounselInput() },
-                    enabled = viewModel.isInputValid.collectAsStateWithLifecycle().value
+                    requestCounsel = requestCounsel,
+                    enabled = isInputValid
                 )
             }
 
