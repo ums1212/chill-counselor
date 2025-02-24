@@ -50,7 +50,7 @@ fun MainScreen(
             delay(3000)
             viewModel.checkNetworkState()
         } else {
-            viewModel.toggleBGM()
+            viewModel.playBGM()
         }
     }
 
@@ -131,7 +131,10 @@ fun MainScreen(
                     }
                 }
                 is CounselUiState.ServerOutScreen -> FinishButton(
-                    finishApp = finishApp
+                    finishApp = {
+                        viewModel.releaseBGM()
+                        finishApp()
+                    }
                 )
                 else -> {}
             }
@@ -142,7 +145,8 @@ fun MainScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(dimensionResource(R.dimen.bgm_button_row_padding)),
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = stringResource(R.string.bgm_copyright),

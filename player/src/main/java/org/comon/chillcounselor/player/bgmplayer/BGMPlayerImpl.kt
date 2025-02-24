@@ -4,13 +4,11 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
-import dagger.hilt.android.qualifiers.ApplicationContext
 import org.comon.chillcounselor.domain.bgmplayer.BGMPlayer
 import org.comon.player.R
-import javax.inject.Inject
 
-class BGMPlayerImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+class BGMPlayerImpl(
+    private val context: Context
 ): BGMPlayer {
 
     private val bgmUri by lazy {
@@ -39,6 +37,10 @@ class BGMPlayerImpl @Inject constructor(
     override fun pause(){
         mediaPlayer.stop()
         mediaPlayer.prepare()
+    }
+
+    override fun release() {
+        mediaPlayer.release()
     }
 
 }

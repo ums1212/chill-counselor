@@ -26,6 +26,7 @@ class CounselViewModel @Inject constructor(
     private val checkNetworkStateUseCase: CheckNetworkStateUseCase,
     private val playBGMUseCase: PlayBGMUseCase,
     private val pauseBGMUseCase: PauseBGMUseCase,
+    private val releaseBGMUseCase: PauseBGMUseCase
 ) : ViewModel() {
 
     private val _counselUiState = MutableStateFlow<CounselUiState>(CounselUiState.SplashScreen)
@@ -121,6 +122,16 @@ class CounselViewModel @Inject constructor(
         }else{
             pauseBGMUseCase.invoke()
         }
+    }
+
+    fun playBGM(){
+        _bgmPlayState.value = true
+        playBGMUseCase.invoke()
+    }
+
+    fun releaseBGM(){
+        _bgmPlayState.value = false
+        releaseBGMUseCase.invoke()
     }
 }
 
