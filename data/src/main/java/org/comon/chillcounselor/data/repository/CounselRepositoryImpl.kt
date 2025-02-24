@@ -29,6 +29,7 @@ class CounselRepositoryImpl @Inject constructor(
             throw IOException(exceptionMessage)
         }
     }.catch { error ->
+        Log.e("CounselRepositoryImpl", "$error")
         emit(Result.failure(error))
     }
 
