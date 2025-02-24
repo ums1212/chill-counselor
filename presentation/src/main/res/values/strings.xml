@@ -1,5 +1,5 @@
 <resources>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">ChillGuy상담</string>
 
     <string name="content_description_splash_screen_image">content_description_splash_screen_image</string>
     <string name="content_description_chill_guy_image">content_description_chill_guy_image</string>
