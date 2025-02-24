@@ -2,24 +2,19 @@ package org.comon.chillcounselor.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
-import com.google.android.material.color.MaterialColors
-import org.comon.chillcounselor.presentation.ui.theme.ChillCounselorTheme
 import org.comon.presentation.R
 
 @Composable
@@ -31,10 +26,10 @@ fun BGMButton(
         onClick = toggleBGM
     ) {
         Icon(
-            imageVector = if(bgmState){
-                Icons.Default.Close
+            painter = if(bgmState){
+                painterResource(R.drawable.speaker_play)
             } else {
-                Icons.Filled.PlayArrow
+                painterResource(R.drawable.speaker_mute)
             },
             stringResource(R.string.content_description_bgm_button)
         )
