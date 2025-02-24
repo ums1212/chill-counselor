@@ -1,8 +1,10 @@
-package org.comon.chillcounselor.player.di
+package org.comon.chillcounselor.di
 
-import dagger.Binds
+import android.content.Context
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import org.comon.chillcounselor.domain.bgmplayer.BGMPlayer
 import org.comon.chillcounselor.player.bgmplayer.BGMPlayerImpl
@@ -10,9 +12,12 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class BGMPlayerModule {
+object PlayerModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindBGMPlayer(impl: BGMPlayerImpl): BGMPlayer
+    fun provideBGMPlayer(
+        @ApplicationContext context: Context
+    ): BGMPlayer = BGMPlayerImpl(context)
+
 }
