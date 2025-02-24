@@ -4,8 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.comon.chillcounselor.domain.bgmplayer.BGMPlayer
 import org.comon.chillcounselor.domain.repository.CounselRepository
 import org.comon.chillcounselor.domain.usecase.CheckNetworkStateUseCase
+import org.comon.chillcounselor.domain.usecase.PauseBGMUseCase
+import org.comon.chillcounselor.domain.usecase.PlayBGMUseCase
 import org.comon.chillcounselor.domain.usecase.RequestCounselUseCase
 import org.comon.chillcounselor.domain.util.NetworkStateManager
 import javax.inject.Singleton
@@ -23,5 +26,15 @@ object DomainModule {
     @Singleton
     fun  provideCheckNetworkStateUseCase(networkStateManager: NetworkStateManager): CheckNetworkStateUseCase =
         CheckNetworkStateUseCase(networkStateManager)
+
+    @Provides
+    @Singleton
+    fun  providePlayBGMUseCase(bgmPlayer: BGMPlayer): PlayBGMUseCase =
+        PlayBGMUseCase(bgmPlayer)
+
+    @Provides
+    @Singleton
+    fun  providePauseBGMUseCase(bgmPlayer: BGMPlayer): PauseBGMUseCase =
+        PauseBGMUseCase(bgmPlayer)
 
 }

@@ -15,6 +15,8 @@ import kotlinx.coroutines.launch
 import org.comon.chillcounselor.domain.model.RequestCounselData
 import org.comon.chillcounselor.domain.model.ResponseCounselData
 import org.comon.chillcounselor.domain.usecase.CheckNetworkStateUseCase
+import org.comon.chillcounselor.domain.usecase.PauseBGMUseCase
+import org.comon.chillcounselor.domain.usecase.PlayBGMUseCase
 import org.comon.chillcounselor.domain.usecase.RequestCounselUseCase
 import javax.inject.Inject
 
@@ -22,6 +24,8 @@ import javax.inject.Inject
 class CounselViewModel @Inject constructor(
     private val requestCounselUseCase: RequestCounselUseCase,
     private val checkNetworkStateUseCase: CheckNetworkStateUseCase,
+    private val playBGMUseCase: PlayBGMUseCase,
+    private val pauseBGMUseCase: PauseBGMUseCase,
 ) : ViewModel() {
 
     private val _counselUiState = MutableStateFlow<CounselUiState>(CounselUiState.SplashScreen)
@@ -112,6 +116,11 @@ class CounselViewModel @Inject constructor(
 
     fun toggleBGM(){
         _bgmPlayState.value = !_bgmPlayState.value
+        if(_bgmPlayState.value){
+            playBGMUseCase.invoke()
+        }else{
+            pauseBGMUseCase.invoke()
+        }
     }
 }
 

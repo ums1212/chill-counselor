@@ -30,4 +30,7 @@
     <string name="counsel_text_field_empty_message">고민을 작성해주세요</string>
     <string name="counsel_text_field_counter">%1$d /1000</string>
 
+    <string name="bgm_copyright">Music by Akiko Shina from Pixabay</string>
+
+
 </resources>

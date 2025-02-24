@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.delay
@@ -141,6 +144,10 @@ fun MainScreen(
                     .padding(dimensionResource(R.dimen.bgm_button_row_padding)),
                 horizontalArrangement = Arrangement.End
             ) {
+                Text(
+                    text = stringResource(R.string.bgm_copyright),
+                    fontSize = dimensionResource(R.dimen.copyright_text_size).value.sp
+                )
                 BGMButton(
                     bgmState = viewModel.bgmPlayState.collectAsStateWithLifecycle().value,
                     toggleBGM = { viewModel.toggleBGM() }
