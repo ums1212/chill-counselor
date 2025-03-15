@@ -2,9 +2,11 @@ package org.comon.chillcounselor.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -13,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import org.comon.presentation.R
 
 @Composable
@@ -24,11 +28,14 @@ fun CounselTextField(
         value = textValue,
         onValueChange = changeTextValue,
         modifier = Modifier
-            .fillMaxWidth()
+            .width(dimensionResource(R.dimen.button_min_width))
             .padding(horizontal = dimensionResource(R.dimen.text_field_horizontal_padding))
             .height(dimensionResource(R.dimen.text_field_height)),
         placeholder = {
-            Text(stringResource(R.string.counsel_text_field_placeholder))
+            Text(
+                text = stringResource(R.string.counsel_text_field_placeholder),
+                overflow = TextOverflow.Visible
+            )
         },
         supportingText = {
             Row(

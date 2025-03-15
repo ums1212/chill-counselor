@@ -3,6 +3,7 @@ package org.comon.chillcounselor.presentation.component
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +17,7 @@ import org.comon.presentation.R
 fun AnswerText(text: String){
     Card(
         modifier = Modifier
-            .fillMaxWidth()
+            .width(dimensionResource(R.dimen.card_min_width))
             .padding(top = dimensionResource(R.dimen.answer_text_card_top_padding))
             .padding(horizontal = dimensionResource(R.dimen.answer_text_card_horizontal_padding)),
         border = BorderStroke(

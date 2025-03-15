@@ -26,7 +26,7 @@
     <string name="back_button">돌아가기</string>
     <string name="quit_button">앱 종료</string>
 
-    <string name="counsel_text_field_placeholder">고민과 관련없는 내용이 있을 경우 답변이 나오지 않을 수 있습니다.</string>
+    <string name="counsel_text_field_placeholder">고민과 관련없는 내용이 있을 경우 \n답변이 나오지 않을 수 있습니다.</string>
     <string name="counsel_text_field_empty_message">고민을 작성해주세요</string>
     <string name="counsel_text_field_counter">%1$d /1000</string>
 

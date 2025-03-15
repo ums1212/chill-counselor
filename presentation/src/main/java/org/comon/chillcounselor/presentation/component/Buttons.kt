@@ -1,6 +1,6 @@
 package org.comon.chillcounselor.presentation.component
 
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.comon.presentation.R
 
@@ -44,7 +45,7 @@ fun StartButton(
     Button(
         onClick = startWrite,
         modifier = modifier
-            .fillMaxWidth()
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
         Text(
@@ -62,7 +63,9 @@ fun CompleteButton(
 ){
     Button(
         onClick = requestCounsel,
-        modifier = modifier.padding(top = dimensionResource(R.dimen.button_top_padding)),
+        modifier = modifier
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
+            .padding(top = dimensionResource(R.dimen.button_top_padding)),
         enabled = enabled,
         colors = ButtonColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -86,7 +89,7 @@ fun CancelButton(
     Button(
         onClick = cancelRequest,
         modifier = modifier
-            .fillMaxWidth()
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
         Text(
@@ -104,7 +107,7 @@ fun WriteNewButton(
     Button(
         onClick = startWrite,
         modifier = modifier
-            .fillMaxWidth()
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
         Text(
@@ -122,7 +125,7 @@ fun BackButton(
     Button(
         onClick = backToInitScreen,
         modifier = modifier
-            .fillMaxWidth()
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
             .padding(top = dimensionResource(R.dimen.button_top_padding))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
@@ -141,7 +144,7 @@ fun RewriteButton(
     Button(
         onClick = startWrite,
         modifier = modifier
-            .fillMaxWidth()
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding))
     ) {
         Text(
@@ -159,7 +162,7 @@ fun FinishButton(
     Button(
         onClick = finishApp,
         modifier = modifier
-            .fillMaxWidth()
+            .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
             .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding)),
         colors = ButtonColors(
             containerColor = Color.Red,
