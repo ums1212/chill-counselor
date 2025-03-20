@@ -22,8 +22,8 @@ android {
         applicationId = "org.comon.chillcounselor"
         minSdk = 26
         targetSdk = 35
-        versionCode = 20250315
-        versionName = "1.0.1"
+        versionCode = 20250320
+        versionName = "1.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

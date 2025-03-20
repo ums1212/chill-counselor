@@ -2,6 +2,7 @@ package org.comon.chillcounselor.presentation.component
 
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
@@ -24,7 +25,8 @@ fun BGMButton(
     toggleBGM: () -> Unit
 ){
     IconButton(
-        onClick = toggleBGM
+        onClick = toggleBGM,
+        modifier = Modifier.size(42.dp),
     ) {
         Icon(
             painter = if(bgmState){
@@ -32,7 +34,8 @@ fun BGMButton(
             } else {
                 painterResource(R.drawable.speaker_mute)
             },
-            stringResource(R.string.content_description_bgm_button)
+            contentDescription = stringResource(R.string.content_description_bgm_button),
+            modifier = Modifier.size(32.dp),
         )
     }
 }
@@ -65,7 +68,8 @@ fun CompleteButton(
         onClick = requestCounsel,
         modifier = modifier
             .defaultMinSize(minWidth = dimensionResource(R.dimen.button_min_width))
-            .padding(top = dimensionResource(R.dimen.button_top_padding)),
+            .padding(top = dimensionResource(R.dimen.button_top_padding))
+            .padding(horizontal = dimensionResource(R.dimen.button_horizontal_padding)),
         enabled = enabled,
         colors = ButtonColors(
             containerColor = MaterialTheme.colorScheme.primary,

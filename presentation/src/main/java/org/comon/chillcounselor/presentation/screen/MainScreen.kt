@@ -139,12 +139,11 @@ fun MainScreen(
         }
 
         if(uiState != CounselUiState.SplashScreen){
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(dimensionResource(R.dimen.bgm_button_row_padding)),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
+                horizontalAlignment = Alignment.End,
             ) {
                 Text(
                     text = stringResource(R.string.bgm_copyright),
